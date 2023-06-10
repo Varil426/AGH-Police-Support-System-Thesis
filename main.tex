@@ -1,63 +1,82 @@
-\documentclass[twoside,a4paper,12pt]{article}
-\input{tex/00_preambule.tex}
+\documentclass[12pt]{aghdpl}
+\input{commands}
+\input{packages}
+% \documentclass[language=en,11pt]{aghdpl}  % praca w języku angielskim
+
+%---------------------------------------------------------------------------
 
 \author{Bartłomiej Kręgielewski}
-\title{Inteligentny system wspierania interwencji policyjnych w inteligentnym mieście wraz z symulacją środowiska}
-\setDepartment{Wydział Elektrotechniki, Automatyki, Informatyki i Inżynierii Biomedycznej}
-\setFaculty{Informatyka i Systemy Inteligentne}
-\setMajor{Inżynieria Oprogramowania}
-\setSupervisor{dr hab. inż. Radosław Klimek}
-\setReviewer{TODO}
+\shortauthor{B. Kręgielewski}
+
+\titlePL{Inteligentny system wspierania interwencji policyjnych w inteligentnym mieście wraz z symulacją środowiska}
+\titleEN{Intelligent Police Support System in a Smart City with the environment simulation}
+
+\shorttitlePL{System wspomagania policji w inteligentnym mieście} % skrócona wersja tytułu jeśli jest bardzo długi
+\shorttitleEN{Police Support System in a Smart City}
+
+
+% Dopuszczalne wartości[1,2]:
+% * "Projekt dyplomowy" - na koniec studiów I stopnia
+% * "Praca dyplomowa" - na koniec studiów II stopnia
+% [1] Zasady dyplomowania w roku akademickim 2020/2021 (Decyzja Dziekana WEAIiIB nr 16/2020 z dnia 9 grudnia 2020 roku)
+% [2] Załącznik nr 1a) do Decyzji nr 16/2020 Dziekana Wydziału EAIiIB z dnia 09 grudnia 2020 r.
+\thesistype{Praca dyplomowa}
+%\thesistype{Master of Science Thesis}
+
+\supervisor{dr hab. inż. Radosław Klimek, prof. AGH}
+%\supervisor{Jarosław Wąs, PhD}
+
+\degreeprogramme{Informatyka i Systemy Inteligentne, Inżynieria Oprogramowania}
+%\degreeprogramme{Computer Science}
+
+\date{2023}
+
+%\department{Katedra Informatyki Stosowanej}
+%\department{Department of Applied Computer Science}
+
+\faculty{Wydział Elektrotechniki, Automatyki, Informatyki i Inżynierii Biomedycznej}
+%\faculty{Faculty of Electrical Engineering, Automatics, Computer Science and Biomedical Engineering}
+
+\acknowledgements{TODO} % TODO
 
 \begin{document}
-\pagestyle{empty}
 
-\maketitle
+\titlepages
+\RedefinePlainStyle
 
-\input{tex/02_StudentDeclaration}
-\input{tex/03_MasterThesisOutline}
-\null
-\newpage
-\null
-\newpage
-
-\pagestyle{plain}
-\linespread{1.3}
-\selectfont
-
-\newpage
-\pagenumbering{roman}
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{2}
 \tableofcontents
-\newpage
-\thispagestyle{empty}
-\mbox{}
-\newpage
+\clearpage
 
-\pagenumbering{arabic}
+\include{chapters/10_introduction}
+\include{chapters/20_zagadnienia_teoretyczne}
+\include{chapters/21_problem_badawczy_i_teza}
+\include{chapters/22_smart_city}
+\include{chapters/22_systemy_agentowe}
+\include{chapters/23_komunikacja_asynchroniczna_w_systemach_rozproszonych}
+\include{chapters/24_przetwarzanie_i_wykorzystywanie_danych_geograficznych}
+\include{chapters/25_symulowanie_jednostek_w_miescie}
+\include{chapters/26_algorytmy_SAT}
+\include{chapters/30_implementacja}
+\include{chapters/31_architektura_mikroserwisowa}
+\include{chapters/32_infrastruktura_komunikacyjna}
+\include{chapters/33_implementacja_agentow}
+\include{chapters/34_interfejs_uzytkownika}
+\include{chapters/35_symulacja}
+\include{chapters/40_metodologia_i_analiza_wynikow_badan}
+\include{chapters/41_cel_badan}
+\include{chapters/42_problem_badawczy}
+\include{chapters/43_wybor_metody_badawczej_i_uzasadnienie}
+\include{chapters/44_uzyskane_wyniki_i_ich_analiza}
+\include{chapters/99_conclusion}
 
-\include{tex/10_introduction}
-\include{tex/20_zagadnienia_teoretyczne}
-\include{tex/21_problem_badawczy_i_teza}
-\include{tex/22_smart_city}
-\include{tex/22_systemy_agentowe}
-\include{tex/23_komunikacja_asynchroniczna_w_systemach_rozproszonych}
-\include{tex/24_przetwarzanie_i_wykorzystywanie_danych_geograficznych}
-\include{tex/25_symulowanie_jednostek_w_miescie}
-\include{tex/26_algorytmy_SAT}
-\include{tex/30_implementacja}
-\include{tex/31_architektura_mikroserwisowa}
-\include{tex/32_infrastruktura_komunikacyjna}
-\include{tex/33_implementacja_agentow}
-\include{tex/34_interfejs_uzytkownika}
-\include{tex/35_symulacja}
-\include{tex/40_metodologia_i_analiza_wynikow_badan}
-\include{tex/41_cel_badan}
-\include{tex/42_problem_badawczy}
-\include{tex/43_wybor_metody_badawczej_i_uzasadnienie}
-\include{tex/44_uzyskane_wyniki_i_ich_analiza}
-\include{tex/99_conclusion}
+% itd.
+\appendix
+% \include{appendageA}
+% \include{dodatekB}
+% itd.
 
-\addcontentsline{toc}{section}{Literatura}
-\bibliography{bibliography.bib}
-\bibliographystyle{plain}
+\printbibliography
+
 \end{document}
