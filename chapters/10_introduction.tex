@@ -1,1 +1,41 @@
 \chapter{Wstęp}
+
+\par Współczesna cywilizacja stawia przed sobą liczne wyzwania, które muszą zostać przezwyciężone. W dążeniu do osiągnięcia tego celu nieustannie dąży do optymalizacji i automatyzacji procesów zachodzących w jej obrębie. Począwszy od prostych udogodnień w codziennym życiu, takich jak urządzenia wchodzące w skład inteligentnego domu\english{Smart Home}, aż po systemy zarządzające komunikacją miejską i transportem, a także internetu rzeczy\english{Internet of Things}. Każda dziedzina życia została gruntownie zmieniona dzięki wprowadzeniu komputerów, jednakże to nadal człowiek pozostaje głównym komponentem odpowiedzialnym za podejmowanie decyzji. Oprogramowanie stanowi narzędzie mające na celu wspieranie tego procesu.
+
+\par Niemniej jednak, nasuwa się pytanie, czy jest możliwe przeniesienie części tego obciążenia w kierunku autonomicznego oprogramowania. W szczególności, czy zlecenie maszynom tak krytycznej roli, jaką pełnią służby policyjne, jest korzystnym pomysłem. Warto zauważyć, że wprowadzenie autonomicznego oprogramowania w tak istotnym obszarze wywołuje wiele istotnych kwestii. Problem ten obejmuje jednostki, tj. patrole, które są zobowiązane do funkcjonowania w sposób autonomiczny, jednak równocześnie muszą być zdolne do skutecznej współpracy ze sobą nawzajem oraz do podporządkowania się centralnemu zarządcy.
+
+\section{Zakres pracy}
+\label{sec:zakresPracy}
+
+Planowanym zakresem prac jest:
+\begin{itemize}
+    \item Przygotowanie standardu komunikacji pomiędzy mikro-serwisami\english{micro-service} w systemie rozproszonym.
+    \item Przygotowanie standardu komunikacji między sobą agentów reprezentującymi poszczególnych aktorów w systemie, jak i możliwość postrzegania przez nich otoczenia\english{environment}.
+    \item Implementacja systemu rozproszonego, który reprezentuje system policji (jednostki patrolujące, jednostkę centralną).
+    \item Implementacja aplikacji webowej pozwalającej na:
+    \begin{itemize}
+        \item Monitorowanie obecnego stanu systemu.
+        \item Generowanie raportów z działania systemu. % TODO Zostaje czy usunąć?
+    \end{itemize}
+    \item Implementacja symulacji, która:
+    \begin{itemize}
+        \item Symuluje przebieg incydentów.
+        \item Symuluje ruch i działania patroli.
+        \item Wykorzystuje mapy OpenStreetMap wybranych miast.
+    \end{itemize}
+    \item Skonteneryzowanie mikro-serwisów.
+    \item Implementacja systemu decyzyjnego opartego o algorytm SAT. % TODO Zostaje czy usunąć?
+    \item Zbadanie wpływu działania algorytmu decyzyjnego na działanie systemu. % TODO Zostaje czy usunąć?
+\end{itemize}
+
+\section{Zawartość pracy}
+\label{sec:zawartoscPracy}
+
+Zawartością pracy jest:
+\begin{itemize}
+    \item Określenie celu i motywacji projektu.
+    \item Zbadanie zagadnienia od strony technicznej.
+    \item Opisanie zaimplementowanego rozwiązania i zastosowanych technologii.
+    \item Prezentacja powstałego rozwiązania.
+    \item Przedstawianie zebranych danych oraz sformułowanie wniosków na ich podstawie.
+\end{itemize}
