@@ -1,1 +1,35 @@
 \section{Systemy agentowe}
+
+\par Idea agentów powstała w latach 80. ubiegłego wieku i zyskiwała na popularności w latach 90. Na jej rozwój wpływ miało wielu naukowców i badaczy, w szczególności wyróżniali się:
+
+% TODO Dodać przypisy
+\begin{itemize}
+    \item Marvin Minsky, autor książki "The Society of Mind" (1986), gdzie przedstawił model ludzkiego umysłu jako kolekcję współpracujących "agentów umysłowych".
+    \item John McCarthy, twórca pracy "Programs with Common Sense" (1959), która skupiała się na koncepcji doradztwa bazującego na wiedzy.
+    \item  Rodney Brooks, autor artykułu "A Robust Layered Control System for a Mobile Robot" (1986), gdzie przedstawił koncepcję sterowania robotami na bazie serii warstw, z których każda odpowiadała za określony aspekt zachowania.
+\end{itemize}
+
+\par Omawiani tutaj agenci mogą działać samodzielnie, ale również współpracować między sobą w celu osiągnięcia wspólnych lub indywidualnych celów. Ich cechami charakterystycznymi są:
+\begin{itemize}
+    \item Autonomia - oznaczająca możliwość działania bez bezpośredniej kontroli ze strony ludzi. Agent samodzielnie decyduje o podejmowanych działaniach, jak i decyduje o swoim wewnętrznym stanie.
+    \item Zdolność do działania - agenci posiadają narzędzia (tak zwane efektory) do wpływania na ich środowisko.
+    \item Zdolność do spostrzegania - agenci potrafią zaobserwować zmiany w swoim środowisku za pomocą tak zwanych sensorów.
+    \item Celowość - agenci mają określony cel, bądź cele, które próbują spełnić.
+    \item Zdolność do komunikacji - określająca możliwość porozumiewania się pomiędzy agentami w systemie.
+\end{itemize}
+
+\par Agentów możemy klasyfikować na wiele typów, które wyróżniają się swoim zachowaniem. Podział ten wygląda następująco:
+\begin{itemize}
+    \item Agent reaktywny\english{Reactive Agent} - działa na podstawie bezpośredniego bodźca ze środowiska. Reaguje na zmieniające się otoczenie. % TODO Dodać przypis Rodney Brooks MIT A Robust Layered Control System for a Mobile Robot
+    \item Agent celowy\english{Goal-driven Agent} - posiada określone cele, które próbuje osiągnąć. % TODO Dodać przypis Michaela Wooldridge'a i Nicholasa Jenningsa  "Intelligent Agents: Theory and Practice" (1995)
+    \item Agent poznawczy\english{Cognitive Agent} lub agent inteligentny\english{Intelligent Agent} - jest obdarzony zdolnością do "myślenia", planowania i podejmowania decyzji bazując na wiedzy o otoczeniu. % TODO Dodać przypis "Artificial Intelligence: A Modern Approach" Stuarta Russella i Petera Norviga
+    \item Agent hybrydowy\english{Hybrid Agent} - są to agenci łączący cechy wyżej wymienionych typów.
+\end{itemize}
+
+\par Otoczenie lub środowisko\english{Environment}, które zostało już kilkukrotnie wspomniane, stanowi koncepcję definiującą przestrzeń, w której działa agent. Wydarzenia, które mają miejsce w tym otoczeniu, wpływają na zachowanie agenta, który jest zdolny do podejmowania decyzji i podejmowania działań, które znajdują odzwierciedlenie w tymże środowisku. Otoczenie może przyjmować różne formy, włączając w to fizyczne, wirtualne i symboliczne. Podstawowymi cechami, które określają charakter danego otoczenia, są:
+\begin{itemize}
+    \item Stan - zestaw cech opisujących dane otoczenie.
+    \item Akcje agenta - są to działania, które może podjąć dany agent celem wpłynięcia na środowisko i osiągnięcia postawionych przed nim celów.
+    \item Funkcja celu - określa ona jakość akcji agenta. Pozwala określić czy dana akcja będzie miała pozytywny, czy negatywny wpływ na osiągnięcie określonego celu oraz wyłonienie najlepszej decyzji.
+    \item Polityka - określa strategię, którą agent wykorzysta podczas podejmowania decyzji w środowisku. Jest ona instrukcją, która definiuje jakie akcje powinien podjąć agent, w odpowiedzi na istniejący lub zmieniony stan środowiska, aby osiągnąć swoje cele.
+\end{itemize}

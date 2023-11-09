@@ -1,1 +1,19 @@
-\section{Symulowanie jednostek w mieście}
+\section{Symulowanie jednostek i wydarzeń w mieście}
+
+\par Komputery, praktycznie od samego zarania swoich dziejów, były wykorzystywane do tworzenie symulacji. Już w czasie prac nad projektem \emph{Manhattan} Stanisław Ulam i John von Neumann prowadzili dyskusję na temat modelowania matematycznego procesów, które są zbyt złożone dla podejścia analitycznego, która później przerodziła się w \emph{metodę Monte Carlo}\cite{WIKIPEDIA_METODA_MONTE_CARLO}. Metoda ta, jest dzisiaj powszechnie wykorzystywana w procesie symulowania rozmaitych systemów.
+
+\par Programy te, są próbami stworzenia modeli, które jak najwierniej oddają dany zbiór zachowań i procesów systemów rzeczywistych lub wyimaginowanych w czasie. Pozwalają one na przeprowadzenie eksperymentów w kontrolowanym środowisku, dzięki czemu są użyteczne w analizie i próbach zrozumienia potencjalnych dynamik, bez interakcji z rzeczywistym systemem.
+
+\par Symulacje możemy dzielić według:
+\begin{itemize}
+    \item celu: eksploracyjne, predykcyjne, edukacyjne i optymalizacyjne,
+    \item stopnia determinizmu: deterministyczne i stochastyczne,
+    \item metody: dyskretne, ciągłe i hybrydowe,
+    \item zakresu: mikrosymulacje i makrosymulacje,
+    \item interaktywności: automatyczne i interaktywne.
+\end{itemize}
+Charakterystyka symulacji będzie zależeć oczywiście od celu, który ma ona spełniać.
+
+\par Ważnym aspektem jest zwrócenie uwagi na upływ czasu w symulacji, szczególnie jest on istotny w symulacjach ciągłych. Może on upływać w stosunku $1:1$ z tym upływającym w rzeczywistości. Takie symulacje mogą jednak trwać bardzo długo, a co za tym idzie nie wykorzystywać efektywnie mocy obliczeniowej maszyny i przedłużać czas oczekiwania na wyniki. Jeżeli jednak czas płynie szybciej (bądź wolniej), to odpowiednio obsłużone powinny być zdarzenia i akcje. Przykładowo, jeżeli symulujemy ruch samochodu po drodze to powinniśmy odpowiednio przeskalować pokonaną przez niego drogę, lub kiedy symulujemy akcję, która jest ciągła, to czas jej trwania, również powinien zostać odpowiednio skrócony, dbając przy tym wszystkim o niepojawienie się błędów numerycznych.
+
+
