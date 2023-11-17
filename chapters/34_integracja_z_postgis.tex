@@ -1,1 +1,50 @@
 \section{Integracja z PostGIS}
+\label{sec:integracjaZPostGIS}
+
+\par Aby jak najdokładniej odwzorować ruch uliczny w \emph{Smart City} należało skorzystać z map prawdziwego miasta. Do tego celu został wykorzystany \emph{PostGIS}\cite{POSTGIS_SITE} wraz z \emph{pgRouting}\cite{PGROUTING_SITE}. Działający w oparciu o te technologie serwis, potrafi zaimportować odpowiednio przygotowane pliki \emph{OSM}.
+
+\par Mapy te zostały uzyskane wykorzystując \emph{overpass turbo}\cite{OVERPASS_TURBO_SITE}. Koniecznym były osobne wyeksportowanie pliku zawierającego informacje o drogach i osobne wyeksportowanie danych o dzielnicach, ze względu na ograniczenie narzędzia \emph{osm2pgrouting}\cite{OSM2PGROUTING_GITHUB}, które uniemożliwiało import informacji związanych z dzielnicami. Aby ominąć to ograniczenie, skorzystano z narzędzia \emph{osm2pgsql}\cite{OSM2PGSQL_GITHUB}.
+
+\par Przedstawione poniżej kwerendy pozwalają na uzyskanie interesujących nas danych z \emph{overpass turbo} dla miasta Krakowa.
+
+Informacje o drogach:
+\begin{verbatim}
+[timeout:900][out:xml];
+area["admin_level"=6][name='Kraków']->.a;
+(
+  way(area.a)
+  ['name']
+  ['highway']
+  ['highway' !~ 'path']
+  ['highway' !~ 'steps']
+  ['highway' !~ 'motorway']
+  ['highway' !~ 'motorway_link']
+  ['highway' !~ 'raceway']
+  ['highway' !~ 'bridleway']
+  ['highway' !~ 'proposed']
+  ['highway' !~ 'construction']
+  ['highway' !~ 'elevator']
+  ['highway' !~ 'bus_guideway']
+  ['highway' !~ 'footway']
+  ['highway' !~ 'cycleway']
+  ['foot' !~ 'no']
+  ['access' !~ 'private']
+  ['access' !~ 'no'];
+  node(w)(area.a);
+);
+out body;>;
+\end{verbatim}
+
+Informacje o podziale dzielnicowym:
+\begin{verbatim}
+[timeout:900][out:xml];
+area["admin_level"=6][name='Kraków']->.a;
+(
+  relation(area.a)["admin_level"=9][boundary=administrative]["name"];>;
+);
+out body;
+\end{verbatim}
+
+\par Uzyskane w ten sposób dane, są następnie importowane z wykorzystaniem specjalnie przygotowanego skryptu w procesie inicjalizacji kontenerów \emph{Docker}a. W jaki sposób poprawnie skonfigurować aplikację dla innych plików map zostało opisane w podrozdziale \ref{sec:konfiguracja}.
+
+\par Symulacja, opisana w podrozdziale \ref{sec:symulacja}, wykorzystuje przygotowany serwis do obliczania tras patroli w mieście. Proces ten wykorzystuje zapytania \texttt{SQL}, aby znaleźć trasę pomiędzy dwoma wyznaczonymi wierzchołkami grafu. Dodatkowo, przygotowana w ten sposób trasa jest uzupełniana, o brakujące przejścia - zakładamy możliwość przemieszczenia się w linii prostej pomiędzy dwoma punktami trasy, jeżeli punkt końcowy kroku poprzedzającego, nie jest równy punktowi startowemu kroku następującego.
