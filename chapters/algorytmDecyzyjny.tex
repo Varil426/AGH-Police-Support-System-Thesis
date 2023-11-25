@@ -1,0 +1,23 @@
+\section{Problemy decyzyjne}
+\label{sec:algorytmDecyzyjny}
+
+\par \emph{HQ Agent}, dokładniej opisany w podrozdziale \ref{sec:implementacjaAgentow}, jest odpowiedzialny za podejmowanie decyzji w ramach zarządzania jednostkami patroli w mieście. Jego głównym celem jest podejmowanie decyzji, które będą skutkować w jak największej efektywności działania systemu. Aby określić jego efektywności postanowiono wybrać kilka cech, które pozwolą to stwierdzić. Więcej na ten temat znajduje się w podrozdziale \ref{sec:problemBadawczy}.
+
+\par Miasto jest organizmem, który nieustannie podlega zmianom, dlatego przy podejmowaniu decyzji, nie można brać pod uwagę, tylko i wyłącznie, jego obecnego stanu. Należy również pamiętać o utrzymaniu pewnej rezerwy zasobów, na wypadek zaistnienia nieprzewidzianych sytuacji. Aby rozwiązać ten problem, konieczne jest podjęcie dwóch decyzji. Pierwsza z nich dotyczy rozmieszczenia patroli w poszczególnych dzielnicach, natomiast druga podjętych działań w przypadku zaistnienia incydentów.
+
+\par Aby zbadać wpływ rozmieszczenia patroli w mieście, postanowiono wykorzystać dwie różne metody przydzielania patroli do dzielnic. Pierwsza z nich ma za zadanie przydzielić patrole równomiernie\english{Even distribution}, natomiast druga wykorzystuje wiedzę na temat danych dzielnic i dokonuje decyzji na bazie priorytetów. Zapotrzebowanie danej dzielnicy jest określane na podstawie jej poziomu niebezpieczeństwa. Jest to zmienna konfigurowalna, dokładniej opisana w podrozdziale \ref{sec:konfiguracja}. W pierwszej kolejności zostaną tutaj wybrane rejony, którym najbardziej brakuje jednostek, według ich opisu, we wcześniej wspomnianej konfiguracji.
+
+\par W przypadku zaistnienia incydentu, decyzja zostaje podjęta na podstawie algorytmu wykorzystującego wagi, gdzie każdy z wolnych patroli podlega ocenie. Wybrany zostanie ten patrol, do którego zostanie przypisany najlepszy wynik. Cechy, jakie bierz pod uwagę ten algorytm to:
+\begin{itemize}
+    \item Dystans - określa odległość, jaką patrol musiałby przebyć, aby dotrzeć na miejsce. Obliczana wartości jest normalizowana, na bazie odległości jakie otrzymały pozostałe patrole, gdzie wartość $0$ otrzyma patrol znajdujący się najdalej, natomiast wartość $1$ patrol najbliższy.
+    \item Przypisanie patrolu do dystryktu, w którym dzieje się incydent - $1$, gdy patrol jest przypisany do dzielnicy, w której znajduje się incydent; $0$, gdy patrol jest przypisany do innej dzielnicy.
+    \item Czy zabranie patrolu spowoduje deficyt - wartość ta, jest określana na podstawie obecnej liczby patroli w danej dzielnicy, do której przypisany jest rozważany patrol. Jeżeli zmiana ta spowoduje powstanie lub powiększenie się deficytu, wtedy patrol otrzymuje niższy wynik. Wartości są znormalizowane do przedziału $[0,1]$. 
+\end{itemize}
+
+\par Ostateczna ocena patrolu jest obliczana na podstawie wzoru:
+$$
+x = f_1*w_1+f_2*w_2+f_3*w_3
+$$
+gdzie $f_1$, $f_2$, $f_3$ to wymienione wcześniej cechy, a $w_1$, $w_2$, $w_3$ to wagi. Wpływ na działanie algorytmu ma konfiguracja, opisana dokładniej w podrozdziale \ref{sec:konfiguracja}.
+
+\par Opisany powyżej mechanizm, nie jest stosowany w przypadku wsparcia dla strzelanin. Ponieważ strzelaniny są sytuacjami wyjątkowymi, w sytuacji, w której zdarzy się jej pojawienie, system podejmie decyzję na podstawie odległości i wybierze najbliższy patrol.

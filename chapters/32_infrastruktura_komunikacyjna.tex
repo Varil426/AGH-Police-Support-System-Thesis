@@ -1,4 +1,4 @@
-\section{Infrastruktura komunikacyjna - Message Bus i Message Broker}
+\section{Infrastruktura komunikacyjna -- Message Bus i Message Broker}
 \label{sec:infrastrukturaKomunikacyjna}
 
 \par Komunikacja w systemie jest oparta na \emph{RabbitMQ}, który pełni funkcję \emph{Message Broker}a. To rozwiązanie umożliwia scentralizowanie całego procesu komunikacji w systemie. W ramach tego rozwiązania różne typy wiadomości (zapytania, wydarzenia i komendy) są przypisane do swoich dedykowanych giełd\english{Exchange}. Poszczególne serwisy subskrybują te giełdy, co pozwala im na odbieranie odpowiednich komunikatów. Wiadomości są serializowane do formatu \texttt{JSON}. Podczas inicjalizacji systemu, automatycznie tworzone są wszystkie kolejki i giełdy wiadomości.

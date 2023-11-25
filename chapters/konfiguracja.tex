@@ -89,8 +89,7 @@
     \label{tab:configurationWebAppSettings}
 \end{table}
 
-\par \emph{HQ Service} wymaga skonfigurowania \texttt{HqAgentSettings}. Możliwe ustawienia przedstawia tabela \ref{tab:configurationHqServiceSettings}.
-% TODO Dodać opis konfiguracji algorytmu decyzyjnego
+\par \emph{HQ Service} wymaga skonfigurowania \texttt{HqAgentSettings} i \texttt{DecisionServiceSettings}. Możliwe ustawienia przedstawia tabela \ref{tab:configurationHqServiceSettings}.
 
 \begin{table}[H]
     \centering
@@ -100,6 +99,18 @@
      \hline
      \hline
      HqAgentSettings.HqAgentId & Identyfikator \emph{HQ Agent}. Typ: \texttt{GUID}. \\ 
+     \hline
+     DecisionServiceSettings.EvenPatrolDistribution & Kontroluje przydział patroli do dzielnic. Równomierne lub zależne od \emph{DistrictDangerLevels}. Typ: \texttt{bool}. \\ 
+     \hline
+     DecisionServiceSettings.DistanceWeight & Waga dla cechy: dystans w algorytmie decyzyjnym. Typ: \texttt{double}. \\ 
+     \hline
+     DecisionServiceSettings.SameDistrictWeight & Waga dla cechy: patrol w tej samej dzielnicy. Typ: \texttt{double}. \\ 
+     \hline
+     \makecell[tl]{DecisionServiceSettings\\.InsufficientNumberOfPatrolsInDistrictWeight} & Waga dla cechy: przydział patrolu oddali od wymaganej ilości patroli w dzielnicy, o określonym poziomie niebezpieczeństwa. Typ: \texttt{double}. \\ 
+     \hline
+     DecisionServiceSettings.DistrictDangerLevels & Słownik zawierający poziomy niebezpieczeństwa dla dzielnic. Typ: \texttt{Dictionary<string, DistrictDangerLevelEnum>}. \\ 
+     \hline
+     \makecell[tl]{DecisionServiceSettings\\.DangerLevelRequiredPatrollingPatrols} & Ilość wymaganych patroli w zależności od poziomu niebezpieczeństwa dzielnicy. Wpływa na cechę, kontrolowaną przez \texttt{InsufficientNumberOf PatrolsInDistrictWeight}. Typ:\newline \texttt{Dictionary <DistrictDangerLevelEnum,int>}. \\ 
      \hline
     \end{tabular}
     \caption{Ustawienie specyficzne dla \emph{HQ Service}}
@@ -141,7 +152,9 @@
      \hline
      SimulationSettings.TimeRate & Definiuje o ile razy szybciej powinien płynąć czas w symulacji, niż w rzeczywistości. Typ: \texttt{double}. \\ 
      \hline
-     SimulationSettings.StartDelay & Opóźnienie startu symulacji. Typ: \texttt{TimeSpan?} \\ 
+     SimulationSettings.StartDelay & Opóźnienie startu symulacji. Typ: \texttt{TimeSpan?}. \\ 
+     \hline
+     SimulationSettings.EndAfterSimulationTime & Czas w symulacji, po jakim powinno nastąpić jej zatrzymanie. Typ: \texttt{TimeSpan?}. \\ 
      \hline
      SimulationSettings.HqLocation.Latitude & Szerokość geograficzna lokalizacji kwatery głównej. Typ: \texttt{double}. \\ 
      \hline

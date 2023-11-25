@@ -1,1 +1,7 @@
 \chapter{Podsumowanie i wnioski}
+
+\par Aby spełnić założenia projektu, została przeprowadzona analiza systemów agentowych, systemów rozproszonych, komunikacji w ramach systemów rozproszonych, jak i wykorzystania map \emph{OSM}. Zbadane zostały również dane kontekstowe, pojawiające się w systemie w odniesieniu do obcujących z nimi agentów. Dane te zostały skategoryzowane, jak i została pokazana ich rola w systemie. 
+
+\par W ramach tej pracy, został zaimplementowany rozproszony system mikroserwisowy, z serwisami, w których działają agenci. Dodatkowo została również zaimplementowana symulacja, pozwalająca na przetestowanie działania systemu i przeprowadzenie na nim eksperymentów. Powstała również aplikacja \emph{web}owa, umożliwiająca wizualizację i agregacją danych, dotyczących przebiegu działania. Całość powstałego rozwiązania łączy się za pomocą \emph{RabbitMQ}. Elementy systemu zostały zintegrowane z \emph{PostGIS}, \emph{pgRouting} i \emph{Grafana Loki}. Sumarycznie, powstała implementacja zawiera ponad $20000$ linijek kodu.
+
+\par Stworzony system jest wrażliwy na dane kontekstowe, które jak wykazała analiza, mogą pozytywnie wpłynąć na jego działanie. Pozwalają one na podjęcie rozsądniejszej decyzji, która przynosi pozytywne rezultaty.
