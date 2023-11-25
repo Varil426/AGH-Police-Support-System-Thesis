@@ -7,84 +7,155 @@
 
 \par Zdolność do działania przejawia się poprzez dostęp do funkcji sprzętowych z poziomu aplikacji. Dla przykładu, \emph{Navigation Agent} potrafi wykorzystać \texttt{INavigationService}, aby ten wyświetlił patrolowi drogę do wyznaczonego celu.
 
-\par Wszystkie te cechy (sygnały, akcje, wiadomości) można zidentyfikować, jako jedną z tych pięciu kategorii: relacje\english{Relations}, aktywność\english{Activity}, indywidualność\english{Individuality}, czas\english{Time} i lokalizacja\english{Location}. Ich wykaz, miejsce występowania oraz kategoria zostały przedstawione w tabeli \ref{tab:agentsFeaturesCategorization}.
+% \par Wszystkie te cechy (sygnały, akcje, wiadomości) można zidentyfikować, jako jedną z tych pięciu kategorii: relacje\english{Relations}, aktywność\english{Activity}, indywidualność\english{Individuality}, czas\english{Time} i lokalizacja\english{Location}. Ich wykaz, miejsce występowania oraz kategoria zostały przedstawione w tabeli \ref{tab:agentsFeaturesCategorization}.
 
-\begin{table}[H]
-    \centering
-    \begin{tabular}{|c|c|c|} 
-     \hline
-     Agent & Nazwa & Kategoria \\
-     \hline
-     \hline
-     \emph{Patrol Agent} & Patrolowanie & Aktywność \\ 
-     \hline
-     \emph{Patrol Agent} & Przemieszczenie się & Aktywność \\ 
-     \hline
-     \emph{Patrol Agent} & Rozwiązywanie interwencji & Aktywność \\ 
-     \hline
-     \emph{Patrol Agent} & Udział w strzelaninie & Aktywność \\ 
-     \hline
-     \emph{Patrol Agent} & Stan: w trakcie patrolowania & Indywidualność \\ 
-     \hline
-     \emph{Patrol Agent} & Stan: W trakcie oczekiwania na rozkaz & Indywidualność \\ 
-     \hline
-     \emph{Patrol Agent} & Posiadany rozkaz & Indywidualność \\ 
-     \hline
-     \emph{Patrol Agent} & Obecna lokalizacja & Lokalizacja \\ 
-     \hline
-     \emph{Patrol Agent} & Oczekiwanie na wsparcie & Relacja \\ 
-     \hline
-     \emph{Patrol Agent} & Czas otrzymania ostatniego rozkazu & Czas \\ 
-     \hline
-     
-     \emph{Navigation Agent} & Wyświetlanie trasy do celu & Aktywność \\ 
-     \hline
-     \emph{Navigation Agent} & Lokalizacja docelowa & Indywidualność \\ 
-     \hline
-     \emph{Navigation Agent} & Obecna lokalizacja & Lokalizacja \\
-     \hline
+\par Fundamentem podejmowania decyzji przez agentów jest kontekst. Stanowi on zbiór wszystkich cech, które opisują sytuację, w której znajduje się konkretny byt\cite{UNDERSTANDING_AND_USING_CONTEXT} - w naszym przypadku agent. Z powodu istnienia wielu zmiennych należących do kontekstu, systemy na nich oparte potrafią stać się bardzo złożone. W celu efektywnego zarządzania tymi informacjami, można je przypisać do jednej z pięciu kategorii: relacje\english{Relations}, aktywność\english{Activity}, indywidualność\english{Individuality}, czas\english{Time} i lokalizacja\english{Location}\cite{AN_OPERATIONAL_DEFINITION_OF_CONTEXT}. W ramach rozważanego systemu udało się wyodrębnić cechy kontekstowe, przedstawione w tabeli \ref{tab:agentsFeaturesCategorization}.
 
-     \emph{Gun Agent} & Stan: Czy wystrzelono z pistoletu & Indywidualność \\
+\begin{longtable}{|p{0.5\linewidth}|p{0.25\linewidth}|}
+    \hline
+     Cecha & Kategoria \\
      \hline
+     \hline
+     Własna lokalizacja & Lokalizacja \\
+     \hline
+     Lokalizacja patrolu & Lokalizacja \\
+     \hline
+     Oczekiwanie na rozkaz & Indywidualność \\
+     \hline
+     W trakcie patrolowania & Indywidualność \\
+     \hline
+     W trakcie interwencji & Indywidualność \\
+     \hline
+     W trakcie strzelaniny & Indywidualność \\
+     \hline
+     W drodze na strzelaninę & Indywidualność \\
+     \hline
+     W drodze do interwencji & Indywidualność \\
+     \hline
+     Rozpoczęcie rozwiązywania incydentu & Aktywność \\
+     \hline
+     Zakończenie rozwiązywania incydentu & Aktywność \\
+     \hline
+     Nawigowanie do miejsca docelowego & Aktywność \\
+     \hline
+     Prezentacja danych dzielnicy & Aktywność \\
+     \hline
+     Wydanie polecenia patrolowania & Aktywność \\
+     \hline
+     Wydanie polecenia rozwiązania incydentu & Aktywność \\
+     \hline
+     Wydanie polecenia wsparcia strzelaniny & Aktywność \\
+     \hline
+     Wystrzelenie z pistoletu & Indywidualność \\
+     \hline
+     Stan zarządzanego patrolu & Relacja \\
+     \hline
+     Stan incydentu & Relacja \\
+     \hline
+     Lokalizacja zarządzanego patrolu & Relacja \\
+     \hline
+     Stan innego patrolu biorącego udział w strzelaninie & Relacja \\
+     \hline
+     Czas zgłoszenia incydentu & Czas \\
+     \hline
+     Czas rozpoczęcia rozwiązywania incydentu & Czas \\
+     \hline
+      Czas rozpoczęcia przerodzenia incydentu w strzelaninę & Czas \\
+     \hline
+      Rozkaz od \emph{HQ} & Relacja \\
+     \hline
+     Zawiadomienie o incydencie & Relacja \\
+     \hline
+     Poziom niebezpieczeństwa danej dzielnicy & Relacja \\
+     \hline
+\caption{Tabela identyfikacji cech kontekstowych}
+\label{tab:agentsFeaturesCategorization}
+\end{longtable}
 
-     \emph{HQ Agent} & Stany patroli & Relacja \\
-     \hline
-     \emph{HQ Agent} & Przypisanie patroli do dzielnicy & Relacja \\
-     \hline
-     \emph{HQ Agent} & Lokalizacje patroli & Lokalizacja \\
-     \hline
-     \emph{HQ Agent} & Dzielnice, w których znajdują się patrole & Lokalizacja \\
-     \hline
-     \emph{HQ Agent} & Ustawienia algorytmu decyzyjnego & Indywidualność \\
-     \hline
-     \emph{HQ Agent} & Wydanie rozkazu patrolowi & Aktywność \\
-     \hline
-     \emph{HQ Agent} & Czas trwania strzelaniny & Czas \\
-     \hline
-     \emph{HQ Agent} & Czas trwania incydentu & Czas \\
-     \hline
-
-     Wszyscy agenci & Rozpoczęcie działania & Aktywność \\ 
-     \hline\
-     Wszyscy agenci & Zakończenie działania & Aktywność \\ 
-     \hline
-    \end{tabular}
-    \caption{Tabela identyfikacji cech w kontekście agentów}
-    \label{tab:agentsFeaturesCategorization}
-\end{table}
-
-\par Dodatkowo, w systemie można opisać cykl życia zmiennych kontekstowych w następujący sposób:
+\par Przepływ danych kontekstowych można opisać w postaci ich cyklu życia, zgodnie z regułą \emph{6R}\cite{Klimek2023}. Służy ona do zidentyfikowania zmian zachodzących na zdefiniowanych danych w trakcie ich zbierania\english{Gathering}, \emph{pre-processing}u i \emph{post-processing}u. W ten sposób informacje mogą zostać:
 \begin{itemize}
-    \item Lokalizacja - jest pobierana przez \emph{Navigation Agent}, następnie przekazywana do \emph{Patrol Agent}, który przekazuje ją do \emph{HQ Agent}. Ten decyduje o tym, czy posiada już nowszą wersję tej informacji, czy też nie. W zależności od tego ignoruje lub zachowuje daną informację. Dodatkowo informacja ta jest wzbogacana o kontekst związany z dzielnicą.
-    \item Trasa do celu - jest pobierana przez \emph{Nabigation Agent}, który następnie zachowuje ją u siebie i wyświetla.
-    \item Wystrzał - sygnał obserwowany przez \emph{Gun Agent}, następnie przekazywany do \emph{Patrol Agent} i kierowany dalej do \emph{HQ Agent}, który na jej podstawie ogłasza alarm i wysyła jednostki w ramach wsparcia.
-    \item Rozpoczęcie interwencji - sygnał obserwowany przez \emph{Patrol Agent}, zachowywany i przekazywany do \emph{HQ Agent}.
-    \item Zakończenie interwencji - sygnał obserwowany przez \emph{Patrol Agent}, zachowywany i przekazywany do \emph{HQ Agent}.
-    \item Zakończenie strzelaniny - sygnał obserwowany przez \emph{Patrol Agent}, zachowywany i przekazywany do \emph{HQ Agent}. Jednostka główna musi zdecydować, czy komunikat, który otrzymała nie jest duplikatem, jako iż, w strzelaninie może brać więcej niż jeden patrol.
-    \item Poziom niebezpieczeństwa dzielnicy - informacja na ten temat jest posiadana przez \emph{HQ Agent}, na podstawie której wydaje on rozkazy patrolowania i rozwiązywania incydentów.
+    \item \emph{wyrażone}\english{Represent} - faza zbierania - przechowane w formie niezmienionej,
+    \item \emph{rozwiązane}\english{Resolve} - faza zbierania - przekształcone do formy zgodnej z zapotrzebowaniem systemu,
+    \item \emph{zachowane}\english{Retain} - faza \emph{pre-processing}u - zapisane w formie niezmienionej względem wyniku poprzedniej fazy,
+    \item \emph{wzmocnione}\english{Reinforce} - \emph{pre-processing}u - zgromadzone w ramach większej całości,
+    \item \emph{usunięte}\english{Remove} - faza \emph{post-processing}u - takie dane nie są zachowywane, może to być związane na przykład z ich tymczasową przydatnością,
+    \item \emph{pozostawione}\english{Remain} - faza \emph{post-processing}u - zachowane do następnej fazy cyklu, czyli do momentu, w którym zostaną nadpisane,
 \end{itemize}
+W ramach systemu agentowego policji, przepływy te zostały przedstawione w postaci tabeli \ref{tab:r6CycleForContextData}.
 
-\par Komunikacja między agentami odbywa się przy wykorzystaniu \emph{Message Bus}a., opisanego w podrozdziale \ref{sec:infrastrukturaKomunikacyjna}. Wszystkie wiadomości spełniają interfejs \texttt{IMessage}, a agenci definiują które ich typy są w stanie obsłużyć. Oczywiście sama możliwość wysłania komunikatu, nie rozwiązuje wszystkich problemów w dialogu, dlatego też zostały zaimplementowane dwa dodatkowe mechanizmy rozszerzające bazowe możliwości.
+\begin{landscape}
+    \begin{longtable}{|p{0.18\linewidth}|p{0.18\linewidth}|p{0.18\linewidth}|p{0.18\linewidth}|p{0.18\linewidth}|}
+    \hline
+    Cecha & \emph{Gathering} & \emph{Pre-processing} & \emph{Post-processing} & Agenci zarządzający informacją \\
+    \hline
+    \hline
+
+     Własna lokalizacja & \textbf{Represent}; Dane pozostają w niezmienionej formie. & \textbf{Reinforce}; Oznaczenie lokalizacji znacznikiem czasowym. & \textbf{Remain}; Iformacja zostaje zachowana, dopóki nie zostanie pobrana jej nowsza wersja.  & \emph{Navigation Agent} jest odpowiedzialny za przetwarzanie danych geograficznych. \\
+     \hline
+     Lokalizacja patrolu & \textbf{Resolve}; Porównanie z posiadanymi już danymi poprzez weryfikację znacznika czasowego. & \textbf{Reinforce}; Aktualizacja kolekcji lokalizacji. & \textbf{Remain}; Informacja zostaje zapisana. & \emph{HQ Agent} wykorzystuje te informacje w procesie decyzyjnym. \\
+     \hline
+     Oczekiwanie na rozkaz & \textbf{Represent}; Dane pozostają w niezmienionej formie. & \textbf{Reinforce}; Stan wzbogacany o znacznik czasowy. & \textbf{Remain}; Informacja zostaje zapisana. & \emph{Patrol Agent} aktualizuje swój stan. \\
+     \hline
+     W trakcie patrolowania & \textbf{Represent}; Dane pozostają w niezmienionej formie. & \textbf{Reinforce}; Stan wzbogacany o znacznik czasowy. & \textbf{Remain}; Informacja zostaje zapisana. & \emph{Patrol Agent} aktualizuje swój stan. \\
+     \hline
+     W trakcie interwencji & \textbf{Represent}; Dane pozostają w niezmienionej formie. & \textbf{Reinforce}; Stan wzbogacany o znacznik czasowy. & \textbf{Remain}; Informacja zostaje zapisana. & \emph{Patrol Agent} aktualizuje swój stan. \\
+     \hline
+     W trakcie strzelaniny & \textbf{Represent}; Dane pozostają w niezmienionej formie. & \textbf{Reinforce}; Stan wzbogacany o znacznik czasowy. & \textbf{Remain}; Informacja zostaje zapisana. & \emph{Patrol Agent} aktualizuje swój stan. \\
+     \hline
+     W drodze na strzelaninę & \textbf{Represent}; Dane pozostają w niezmienionej formie. & \textbf{Reinforce}; Stan wzbogacany o znacznik czasowy. & \textbf{Remain}; Informacja zostaje zapisana. & \emph{Patrol Agent} aktualizuje swój stan. \\
+     \hline
+     W drodze do interwencji & \textbf{Represent}; Dane pozostają w niezmienionej formie. & \textbf{Reinforce}; Stan wzbogacany o znacznik czasowy. & \textbf{Remain}; Informacja zostaje zapisana. & \emph{Patrol Agent} aktualizuje swój stan. \\
+     \hline
+     Nawigowanie do miejsca docelowego & \textbf{Represent}; Dane pozostają w niezmienionej formie. & \textbf{Reinforce}; Obliczona zostaje trasa. & \textbf{Remain}; Trasa jest wykorzystywana podczas procesu nawigacji. & \emph{Navigation Agent} wykonuje akcję nawigowania. \\
+     \hline
+     Prezentacja danych dzielnicy & \textbf{Represent}; Dane pozostają w niezmienionej formie. & \textbf{Reinforce}; Pobrany zostaje obszar dzielnicy. & \textbf{Remain}; Pobrane dane są wyświetlane, aby usprawnić nawigowanie po dzielnicy. & \emph{Navigation Agent} pomaga w procesie patrolowania dzielnicy. \\
+     \hline
+     Wydanie polecenia patrolowania & \textbf{Represent}; Dane pozostają w niezmienionej formie. & \textbf{Retain}; Dane pozostają w niezmienionej formie.  & \textbf{Remove}; Rozkaz zostaje wysłany, nie jest on później wykorzystywany\footnote{\label{note:ZapisanieStanuPatrolu}Dopiero zmiana stanu, jaka nastąpi w patrolu, zostanie zachowana jako zaobserwowany stan systemu.}. & \emph{HQ Agent} wydaje polecenie patrolowania patrolowi. \\
+     \hline
+     Wydanie polecenia rozwiązania incydentu & \textbf{Represent}; Dane pozostają w niezmienionej formie. & \textbf{Retain}; Dane pozostają w niezmienionej formie. & \textbf{Remove}; Rozkaz zostaje wysłany, nie jest on później wykorzystywany\footref{note:ZapisanieStanuPatrolu}. & \emph{HQ Agent} wydaje polecenie rozwiązania incydentu patrolowi. \\
+     \hline
+     Wydanie polecenia wsparcia strzelaniny & \textbf{Represent}; Dane pozostają w niezmienionej formie. & \textbf{Retain}; Dane pozostają w niezmienionej formie. & \textbf{Remove}; Rozkaz zostaje wysłany, nie jest on później wykorzystywany\footref{note:ZapisanieStanuPatrolu}. & \emph{HQ Agent} wydaje polecenie wsparcia strzelaniny patrolowi. \\
+     \hline
+     Wystrzelenie z pistoletu & \textbf{Represent}; Dane pozostają w niezmienionej formie. & \textbf{Reinforce}; Dane zostają wzbogacone o znacznik czasowy i dane incydentu. & \textbf{Remain}; Informacja zostaje zgłoszona do \emph{HQ Agent} w postaci zmiany stanu zdarzenia.  & \emph{Gun Agent} obserwuje wystrzał z pistoletu, następnie przekazuje tę informację do \emph{Patrol Agent}, który wzbogaca ją o konteskt. \\
+     \hline
+     Stan zarządzanego patrolu & \textbf{Resolve}; Dane zostają odfiltrowana na podstawie ich aktualności i obecnego stanu wiedzy. & \textbf{Reinforce}; Informacja zostaje dodana do kolekcji stanów patrolu. Może wywołać zmianę stanu incydentu. & \textbf{Remain}; Informacja zostaje zachowana w historii. & \emph{HQ Agent} otrzymuje informację o zmianie stanu patrolu. \\
+     \hline
+     Stan incydentu & \textbf{Resolve}; Dane zostają odfiltrowana na podstawie ich aktualności i obecnego stanu wiedzy. & \textbf{Reinforce}; Informacja zostaje dodana do kolekcji stanów incydentu. & \textbf{Remain}; Informacja zostaje zachowana. & \emph{HQ Agent} otrzymuje informację o zmianie stanu incydentu. \\
+     \hline
+     Lokalizacja zarządzanego patrolu & \textbf{Resolve}; Dane zostają odfiltrowana na podstawie ich aktualności i obecnego stanu wiedzy. & \textbf{Reinforce}; Informacja zostaje zachowana jako historia pozycji patrolu. & \textbf{Remain}; Informacja zostaje zachowana. & \emph{HQ Agent} otrzymuje informację o obecnej lokalizacji patrolu. \\
+     \hline
+     Stan innego patrolu biorącego udział w strzelaninie & \textbf{Resolve}; Dane zostają odfiltrowana na podstawie ich aktualności i obecnego stanu wiedzy. & \textbf{Retain}; Dane pozostają w niezmienionej formie. & \textbf{Remain}; Informacja zostaje zachowana. & \emph{Patrol Agent} obserwuje zmianę stanu innego patrolu, poprzez jego dołączenie do strzelaniny. \\
+     \hline
+     Czas zgłoszenia incydentu & \textbf{Represent}; Dane pozostają w niezmienionej formie. & \textbf{Reinforce}; Informacja zostaje dodana jako wpis do historii przebiegu incydentu. & \textbf{Remain}; Informacja zostaje zachowana. & \emph{HQ Agent} otrzymuje informację o nowym incydencie. \\
+     \hline
+     Czas rozpoczęcia rozwiązywania incydentu & \textbf{Represent}; Dane pozostają w niezmienionej formie. & \textbf{Reinforce}; Informacja zostaje dodana jako wpis do historii przebiegu incydentu. & \textbf{Remain}; Informacja zostaje zachowana. & \emph{HQ Agent} obserwuje zmianę stanu incydentu i na jej podstawie dokonuje wpisu. \\
+     \hline
+     Czas rozpoczęcia przerodzenia incydentu w strzelaninę & \textbf{Represent}; Dane pozostają w niezmienionej formie. & \textbf{Reinforce}; Informacja zostaje dodana jako wpis do historii przebiegu incydentu. & \textbf{Remain}; Informacja zostaje zachowana. & \emph{HQ Agent} obserwuje zmianę stanu incydentu i na jej podstawie dokonuje wpisu. \\
+     \hline
+     Rozkaz od \emph{HQ}  & \textbf{Resolve}; Dane zostają odfiltrowana na podstawie ich aktualności i obecnego stanu wiedzy. & \textbf{Reinforce}; Informacja zostaje skojarzona z dzielnicą miasta. Dodatkowo zostaje odpowiednio zinterpretowana. & \textbf{Remain}; Rozkaz zostaje zachowany. & \emph{Patrol Agent} otrzymuje rozkaz. \\
+     \hline
+     Zawiadomienie o incydencie  & \textbf{Resolve}; Informacja zostaje odfiltrowana na bazie obecnego stanu wiedzy, aby uniknąć duplikatów. & \textbf{Reinforce}; Informacje o incydencie zostają skojarzone z dzielnicą i jej poziomem niebezpieczeństwa. & \textbf{Remain}; Informacja zostaje zapisana. & \emph{HQ Agent} otrzymuje zgłoszenie nowego incydentu. \\
+     \hline
+      Poziom niebezpieczeństwa danej dzielnicy &  \textbf{Represent}; Dane pozostają w niezmienionej formie. & \textbf{Reinforce}; Dane zostają skojarzone z incydentami i lokalizacjami patroli. & \textbf{Remain}; Informacja zostaje zachowana. & \emph{HQ Agent} otrzymuje informację o poziomie niebezpieczeństwa danej dzielnicy. \\
+      \hline
+    \caption{Cykl \emph{R6} dla danych kontekstowych}
+    \label{tab:r6CycleForContextData}
+    \end{longtable}
+\end{landscape}
+
+
+% \par Dodatkowo, w systemie można opisać cykl życia zmiennych kontekstowych w następujący sposób:
+% \begin{itemize}
+%     \item Lokalizacja - jest pobierana przez \emph{Navigation Agent}, następnie przekazywana do \emph{Patrol Agent}, który przekazuje ją do \emph{HQ Agent}. Ten decyduje o tym, czy posiada już nowszą wersję tej informacji, czy też nie. W zależności od tego ignoruje lub zachowuje daną informację. Dodatkowo informacja ta jest wzbogacana o kontekst związany z dzielnicą.
+%     \item Trasa do celu - jest pobierana przez \emph{Nabigation Agent}, który następnie zachowuje ją u siebie i wyświetla.
+%     \item Wystrzał - sygnał obserwowany przez \emph{Gun Agent}, następnie przekazywany do \emph{Patrol Agent} i kierowany dalej do \emph{HQ Agent}, który na jej podstawie ogłasza alarm i wysyła jednostki w ramach wsparcia.
+%     \item Rozpoczęcie interwencji - sygnał obserwowany przez \emph{Patrol Agent}, zachowywany i przekazywany do \emph{HQ Agent}.
+%     \item Zakończenie interwencji - sygnał obserwowany przez \emph{Patrol Agent}, zachowywany i przekazywany do \emph{HQ Agent}.
+%     \item Zakończenie strzelaniny - sygnał obserwowany przez \emph{Patrol Agent}, zachowywany i przekazywany do \emph{HQ Agent}. Jednostka główna musi zdecydować, czy komunikat, który otrzymała nie jest duplikatem, jako iż, w strzelaninie może brać więcej niż jeden patrol.
+%     \item Poziom niebezpieczeństwa dzielnicy - informacja na ten temat jest posiadana przez \emph{HQ Agent}, na podstawie której wydaje on rozkazy patrolowania i rozwiązywania incydentów.
+% \end{itemize}
+
+\par Komunikacja między agentami odbywa się przy wykorzystaniu \emph{Message Bus}a, opisanego w podrozdziale \ref{sec:infrastrukturaKomunikacyjna}. Wszystkie wiadomości spełniają interfejs \texttt{IMessage}, a agenci definiują które ich typy są w stanie obsłużyć. Oczywiście sama możliwość wysłania komunikatu, nie rozwiązuje wszystkich problemów w dialogu, dlatego też zostały zaimplementowane dwa dodatkowe mechanizmy rozszerzające bazowe możliwości.
 
 \par Pierwszym z nich jest możliwość odpytania\english{Ask} innego agenta i oczekiwania na odpowiedź. Jest to niezbędny mechanizm, podczas podejmowania decyzji wymagających danych, których dany agent nie posiada.
 
