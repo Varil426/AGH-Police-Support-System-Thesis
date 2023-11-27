@@ -20,4 +20,6 @@ x = f_1*w_1+f_2*w_2+f_3*w_3
 $$
 gdzie $f_1$, $f_2$, $f_3$ to wymienione wcześniej cechy, a $w_1$, $w_2$, $w_3$ to wagi. Wpływ na działanie algorytmu ma konfiguracja, opisana dokładniej w podrozdziale \ref{sec:konfiguracja}.
 
-\par Opisany powyżej mechanizm, nie jest stosowany w przypadku wsparcia dla strzelanin. Ponieważ strzelaniny są sytuacjami wyjątkowymi, w sytuacji, w której zdarzy się jej pojawienie, system podejmie decyzję na podstawie odległości i wybierze najbliższy patrol.
+\par Opisany powyżej mechanizm, nie jest stosowany w przypadku wsparcia dla strzelanin. Ponieważ strzelaniny są sytuacjami wyjątkowymi. W przypadku, w którym zdarzy się jej pojawienie, system podejmie decyzję na podstawie odległości i wybierze najbliższy patrol.
+
+\par Tak zaimplementowany mechanizm znajduje się obecnie w systemie, jednak nic nie stoi na przeszkodzie, aby zastąpić go innym. W tym celu należy zaimplementować interfejs \texttt{IDecisionService} i zamienić implementację, podczas rejestracji w kontenerze \emph{IoC}\footnote{Inversion Of Control}. Można tego dokonać w \texttt{ApplicationModule}, znajdującym się w \emph{HQ Service}.
