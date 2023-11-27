@@ -38,6 +38,8 @@
      \hline
      Nawigowanie do miejsca docelowego & Aktywność \\
      \hline
+     Zakończenie nawigowania do miejsca docelowego & Relacja \\
+     \hline
      Prezentacja danych dzielnicy & Aktywność \\
      \hline
      Wydanie polecenia patrolowania & Aktywność \\
@@ -105,6 +107,8 @@ W ramach systemu agentowego policji, przepływy te zostały przedstawione w post
      W drodze do interwencji & \textbf{Represent}; Dane pozostają w niezmienionej formie. & \textbf{Reinforce}; Stan wzbogacany o znacznik czasowy. & \textbf{Remain}; Informacja zostaje zapisana. & \emph{Patrol Agent} (\textbf{write}) aktualizuje swój stan. Jest on przekazywany do \emph{HQ Agent} (\textbf{read}) w postaci \emph{stanu zarządzanego patrolu}. \\
      \hline
      Nawigowanie do miejsca docelowego & \textbf{Represent}; Dane pozostają w niezmienionej formie. & \textbf{Reinforce}; Obliczona zostaje trasa. & \textbf{Remain}; Trasa jest wykorzystywana podczas procesu nawigacji. & \emph{Navigation Agent} (\textbf{write}) wykonuje akcję nawigowania. \\
+     \hline
+     Zakończenie nawigowania do miejsca docelowego & \textbf{Represent}; Dane pozostają w niezmienionej formie. & \textbf{Retain}; Dane pozostają w niezmienionej formie. & \textbf{Remove}; \emph{Patrol Agent} odnotowuje tę informację i zmienia swój stan. & \emph{Navigation Agent} (\textbf{read}) przekazuje informację o osiągnięciu lokalizacji docelowej do \emph{Patrol Agent} (\textbf{read}). \\
      \hline
      Prezentacja danych dzielnicy & \textbf{Represent}; Dane pozostają w niezmienionej formie. & \textbf{Reinforce}; Pobrany zostaje obszar dzielnicy. & \textbf{Remain}; Pobrane dane są wyświetlane, aby usprawnić nawigowanie po dzielnicy. & \emph{Navigation Agent} (\textbf{write}) pomaga w procesie patrolowania dzielnicy. \\
      \hline
