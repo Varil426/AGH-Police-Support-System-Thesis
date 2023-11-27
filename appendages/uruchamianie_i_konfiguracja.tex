@@ -1,0 +1,158 @@
+\chapter{Konfiguracja środowiska i uruchomienie systemu}
+
+\section{Wymagania}
+
+\par Do uruchomienia systemu są wymagane:
+\begin{itemize}
+    \item \emph{Docker}\cite{DOCKER_SITE} - wersja \texttt{24.0.6} lub wyższa,
+    \item \emph{.NET}\cite{DOTNET_SITE} - wersja \texttt{.NET 7} - tylko w przypadku uruchamiania serwisów poza \emph{Docker}em,
+    \item \emph{NodeJS}\cite{NODEJS_SITE} - wersja \texttt{20.5.1} - służy do uruchomienia \emph{front end}u,
+    \item \emph{Yarn}\cite{YARN_SITE} - wersja \texttt{1.22.19} - służy do uruchomienia \emph{front end}u.
+\end{itemize}
+
+\section{Informacje ogólne}
+
+Wszystkie polecenia przedstawione w tym dodatku będą zakładać, że są wykonywane z poziomu głównego katalogu dostarczonej solucji. Przykładowa ścieżka:
+\begin{verbatim}
+C:\Users\Varil\source\repos\AGH-Police-Support-System
+\end{verbatim}
+Technologie, z których korzystano są dostępne na wszystkich najpopularniejszych systemach operacyjnych: \emph{Windows}, \emph{Linux} i \emph{macOS}, jednak ich działanie zostało przetestowane tylko w środowisku \emph{Windows}. Wszystkie poniższe polecenia, są poleceniami \emph{PowerShell}owymi.
+
+\par W przypadku korzystania z rozwiązania pobranego przy wykorzystaniu \emph{Git}a\cite{GIT_SITE} należy sprawdzić skrypty \texttt{*.sh}, ponieważ w zależności od konfiguracji systemu kontroli wersji, może on zmienić znaki końca linii z \texttt{LF} na \texttt{CRLF}, co z kolei spowoduje problemy z uruchomieniem kontenerów, które z nich korzystają.
+
+\par Przed przystąpieniem do uruchamiania systemu, należy pamiętać o jego skonfigurowaniu. Konfiguracja została dokładnie opisana w podrozdziale \ref{sec:konfiguracja}. Rozdział ten wspomina o konieczności zapewnienia plików map. Pliki te można uzyskać wykorzystując \emph{overpass turbo}\cite{OVERPASS_TURBO_SITE} i kwerendy przedstawione w podrozdziale \ref{sec:integracjaZPostGIS}.
+
+\section{Uruchamianie wszystkich serwisów przy wykorzystaniu \emph{Docker}a}
+
+\par Aby uruchomić system z wykorzystaniem \emph{Docker}a, należy zbudować i uruchomić plik \texttt{docker-compose.yaml}. Służą do tego polecenia:
+\begin{verbatim}
+docker compose build; docker compose up
+\end{verbatim}
+Spowoduje to zbudowanie, a następnie uruchomienie całości systemu. W pierwszej kolejności zostaną uruchomione kontenery związane z infrastrukturą, następnie główne serwisy i na samym końcu patrole. Dzieje się to zgodnie z zależnościami w pliku \emph{Docker Compose}. Diagram \ref{fig:dockerDockerComposeRelation} prezentuje te zależności.
+
+\par W przypadku uruchomiania tą metodą, serwisy będą działały zgodnie z konfiguracjami w plikach \texttt{appsettings.json} i \texttt{appsettings.Docker.json}, gdzie te drugie nadpisują ustawienia z tych pierwszych, zgodnie z mechanizmem warstw, opisanym dokładniej w podrozdziale \ref{sec:konfiguracja}. Dzieje się tak z powodu przekazania argumentu \texttt{--environment=Docker} w plikach \emph{Dockerfile}.
+
+\par Istnieją dwa sposoby, aby zmodyfikować te ustawienia.
+\begin{enumerate}
+    \item Modyfikacja plików \texttt{appsettings.json} lub \texttt{appsettings.Docker.json} - w tym przypadku wystarczy zmodyfikować interesujące nas wartości i ponownie zbudować kompozycje, wykorzystując polecenie:
+    \begin{quote}
+        \begin{verbatim}
+docker compose build
+        \end{verbatim}
+    \end{quote}
+    \item Przekazanie wartości w postaci zmiennej środowiskowej - zmienne środowiskowe nadpisują wszystkie ustawienia zawarte w plikach \texttt{appsettings.*.json}. Aby ustawić zmienną środowiskową dla interesującego nas kontenera, należy skorzystać z sekcji \texttt{environment} pliku \emph{Docker Compose}. Zmienne należy poprzedzić \emph{prefix}em \texttt{PoliceSupportSystem\_} oraz stosować \texttt{\_\_} zamiast kropek. Przykład:
+    \begin{quote}
+        \begin{verbatim}
+patrol_15:
+    extends:
+      file: patrol-docker-compose.yaml
+      service: patrol
+    environment:
+      - PoliceSupportSystem_PatrolSettings__PatrolId=15
+      - PoliceSupportSystem_PatrolSettings__PatrolAgentId=VALUE
+      - PoliceSupportSystem_PatrolSettings__NavAgentId=VALUE
+      - PoliceSupportSystem_PatrolSettings__GunAgentId=VALUE
+        \end{verbatim}
+    \end{quote}
+\end{enumerate}
+
+\par Aby kontrolować ilość działających w systemie patroli, należy edytować plik \texttt{docker-compose.yaml}. Znajdują się w nim definicje patroli. Aby dodać nowy patrol należy dodać definicję, według wzoru:
+\begin{verbatim}
+patrol_{PatrolID}:
+    extends:
+      file: patrol-docker-compose.yaml
+      service: patrol
+    environment:
+      - PoliceSupportSystem_PatrolSettings__PatrolId={PatrolID}
+      - PoliceSupportSystem_PatrolSettings__PatrolAgentId={PatrolAgentId}
+      - PoliceSupportSystem_PatrolSettings__NavAgentId={NavAgentId}
+      - PoliceSupportSystem_PatrolSettings__GunAgentId={GunAgentId}
+\end{verbatim}
+gdzie:
+\begin{itemize}
+    \item \texttt{PatrolID} - \texttt{string}; identyfikator patrolu jako całości,
+    \item \texttt{PatrolAgentId} - \texttt{GUID}; identyfikator agenta patrolu,
+    \item \texttt{NavAgentId} - \texttt{GUID}; identyfikator agenta nawigacji,
+    \item \texttt{GunAgentId} - \texttt{GUID}; identyfikator agenta pistoletu.
+\end{itemize}
+
+\section{Manualne uruchamianie serwisów}
+
+\par Wszystkie z zaimplementowanych serwisów korzystają z infrastruktury, którą zapewnia plik \texttt{infrastructure-docker-compose.yaml}. Aby go uruchomić należy wykonać:
+\begin{verbatim}
+docker compose -f .\infrastructure-docker-compose.yaml build;
+docker compose -f .\infrastructure-docker-compose.yaml up
+\end{verbatim}
+Uruchamia on kontenery: \texttt{rabbitmq}, \texttt{simulationdb}, \texttt{loki} i \texttt{grafana}. Wszystkie serwisy komunikujące się z symulacją, oczekują również, że zostanie ona uruchomiona przed nimi. Aby tego dokonać, można ją uruchomić poleceniem:
+\begin{verbatim}
+dotnet run --project .\PoliceSupportSystem\Simulation.Simulation\
+\end{verbatim}
+Uruchomiona w ten sposób symulacja korzysta z ustawień w plikach \texttt{appsettings.json} i \texttt{appsettings.Development.json}.
+
+\par Możliwym jest również uruchomienie wszystkich serwisów poza tymi, które składają się na patrole, wykorzystując \texttt{police-services-docker-compose.yaml}. Zostaną wtedy uruchomione kontenery: \texttt{rabbitmq}, \texttt{simulationdb}, \texttt{loki}, \texttt{grafana}, \texttt{simulation}, \texttt{hqservice} i \texttt{webapp}.
+\begin{verbatim}
+docker compose -f .\police-services-docker-compose.yaml build;
+docker compose -f .\police-services-docker-compose.yaml up
+\end{verbatim}
+
+\par Aby ręcznie uruchomić: \emph{RabbitMQ}, \emph{PostreSQL}, \emph{Grafana Loki} lub \emph{Grafana}. Należy skorzystać z plików \emph{Dockerfile}. Pliki zostały przedstawione w tabeli \ref{tab:dockerfileServicesDockerfileList}. Należy zbudować obraz, a następnie go uruchomić.
+
+\begin{table}
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        Serwis & Ścieżka do \emph{Dockerfile} lub nazwa obrazu \\
+        \hline
+        \hline
+        \emph{RabbitMQ} & \texttt{rabbitmq:management-alpine} \\
+        \hline
+        \emph{PostreSQL} & \texttt{.\char`\\SimulationDb\char`\\Dockerfile} \\
+        \hline
+        \emph{Grafana Loki} & \texttt{grafana/loki}  \\
+        \hline
+        \emph{Grafana} & \texttt{grafana/grafana} \\
+        \hline
+    \end{tabular}
+    \caption{Lista serwisów wraz z odpowiadającymi im plikami \emph{Dockerfile}}
+    \label{tab:dockerfileServicesDockerfileList}
+\end{table}
+
+\par Aby ręcznie uruchomić \emph{Patrol Service}, \emph{Navigation Service}, \emph{Gun Service}, \emph{HQ Service} lub \emph{WebApp}, należy skorzystać z wspomnianego wcześniej polecenia
+\begin{verbatim}
+    dotnet run --project PATH_TO_PROJECT
+\end{verbatim}
+Ścieżki do poszczególnych projektów zostały przedstawione w tabeli \ref{tab:dotnetServicesAndProjetPaths}.
+
+\begin{table}[]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        Serwis & Ścieżka \\
+         \hline
+         \hline
+        \emph{Patrol Service} & \texttt{.\char`\\PoliceSupportSystem\char`\\PatrolService.Service\char`\\} \\
+         \hline
+         \emph{Navigation Service} & \texttt{.\char`\\PoliceSupportSystem\char`\\NavigationService.Service\char`\\} \\
+         \hline
+         \emph{Gun Service} & \texttt{.\char`\\PoliceSupportSystem\char`\\GunService.Service\char`\\} \\
+         \hline
+         \emph{HQ Service} & \texttt{.\char`\\PoliceSupportSystem\char`\\HqService.Service\char`\\} \\
+         \hline
+         \emph{WebApp} & \texttt{.\char`\\PoliceSupportSystem\char`\\WebApp.API\char`\\} \\
+         \hline
+    \end{tabular}
+    \caption{Serwisy zaimplementowane w \emph{.NET} i ścieżki do ich projektów}
+    \label{tab:dotnetServicesAndProjetPaths}
+\end{table}
+
+\section{Front End}
+
+\par Aby zbudować i uruchomić aplikację webową, która służy do wizualizacji, należy wykonać polecenia:
+\begin{verbatim}
+cd .\frontend\
+yarn install
+yarn start
+\end{verbatim}
+Należy przy tym pamiętać, że korzysta ona z serwisu \emph{WebApp}, który powinien również zostać uruchomiony. Aplikacja powinna być dostępna pod adresem \texttt{http://localhost:3004/}.
+
+\par Aby zmienić port, którym posługuje się aplikacja, należy edytować plik \texttt{.\char`\\frontend\char`\\.env.development}. W przypadku zmiany adresu, pod którym dostępny jest \emph{back end}, należy edytować plik \texttt{.\char`\\frontend\char`\\src\char`\\api\char`\\ApiRoutes.ts} i w stałej \texttt{HOST} podać prawidłowy adres hosta.

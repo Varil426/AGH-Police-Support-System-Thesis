@@ -1,7 +1,7 @@
 \section{Konteneryzacja systemu}
 \label{sec:konteneryzacjaSystemu}
 
-\par Aby przetestować działanie systemu rozproszonego, postanowiono go skonteneryzować. W tym celu skorzystano z \emph{Docekr}a i istniejącej w nim funkcji \emph{Compose}. Uprościło to proces uruchamiania, jak i umożliwiło automatyczne skonfigurowanie poszczególnych serwisów. Całość systemu została przedstawiona na diagramie \ref{fig:dockerServiceRelations}. Przedstawia on również zależności między serwisami, jakie zostały zdefiniowane w ramach plików \emph{Docker Compose}. Zależności te wyznaczają kolejność uruchomienia serwisów - wszystkie serwisy, od których zależy dany serwis, muszą zostać uprzednio uruchomione. Oznacza to, że serwisy
+\par Aby przetestować działanie systemu rozproszonego, postanowiono go skonteneryzować. W tym celu skorzystano z \emph{Docekr}a\cite{DOCKER_SITE} i istniejącej w nim funkcji \emph{Compose}\cite{DOCKER_COMPOSE_DOCS}. Uprościło to proces uruchamiania, jak i umożliwiło automatyczne skonfigurowanie poszczególnych serwisów. Całość systemu została przedstawiona na diagramie \ref{fig:dockerServiceRelations}. Przedstawia on również zależności między serwisami, jakie zostały zdefiniowane w ramach plików \emph{Docker Compose}. Zależności te wyznaczają kolejność uruchomienia serwisów - wszystkie serwisy, od których zależy dany serwis, muszą zostać uprzednio uruchomione. Oznacza to, że serwisy
 
 \begin{figure}
     \centering
