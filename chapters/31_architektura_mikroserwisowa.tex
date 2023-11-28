@@ -17,11 +17,7 @@ Jednak stworzenie złożonego systemu rozproszonego, wymaga odpowiedniego podzia
 
 \par Głównymi obowiązkami \emph{HQ Service}u są odbieranie zgłoszeń incydentów występujących w mieście oraz zarządzanie patrolami poprzez monitorowanie ich stanów i wydawanie odpowiednich rozkazów. Ten serwis zawiera także informacje na temat obecnego stanu miasta i promuje wszystkie zdarzenia domenowe\english{Domain Event}, jako odpowiednio zmapowane wydarzenia integracyjne\english{Integration Event}, aby ogłosić zmianę stanu systemu dla pozostałych zainteresowanych serwisów. Więcej na ten temat opisane jest w podrozdziale \ref{sec:infrastrukturaKomunikacyjna}. Tutaj znajduje się \emph{HQ Agent}, odpowiedzialny za zarządzanie i komunikację z agentami patroli (\ref{sec:implementacjaAgentow}).
 
-% TODO Czy generuje raporty?
-
 \par \emph{API} w tym systemie nie pełni aktywnej roli, ale działa w sposób pasywny. Jego głównym zadaniem jest obserwacja zmian i gromadzenie danych. Stanowi ono \emph{back end} dla interfejsu użytkownika, co oznacza, że działa w roli serwera, udostępniając dane dla aplikacji klienckiej. Umożliwia generowanie raportów opartych na zbieranych informacjach, które są agregowane z wydarzeń występujących w systemie. Ponadto, pozwala na prezentację obecnego stanu systemu, co jest istotne dla monitorowania i podejmowania decyzji.
-
-%TODO Decision System Service
 
 \par \emph{Logger Service} ma za zadanie agregować logi z systemu, a do tego celu wykorzystuje \emph{Grafana Loki}\cite{GRAFANA_LOKI_SITE}. Jest to system do zarządzania logami, stworzony przez \emph{Grafana Labs}. Wybór tego narzędzia był podyktowany kilkoma czynnikami, w tym otwartą licencją \texttt{AGPLv3}, łatwością wdrażania w kontenerach \emph{Docker}\cite{DOCKER_SITE} oraz integracją z platformą \emph{Grafana}\cite{GRAFANA_SITE}. \emph{Grafana} zapewnia rozwiązania do monitorowania i wizualizacji danych przechowywanych w Loki. System ten wyróżnia się wysoką skalowalnością oraz prostotą w filtrowaniu otrzymywanych komunikatów, co czyni go efektywnym narzędziem do zarządzania logami w systemie.
 
