@@ -1,25 +1,3 @@
-# paper_template_agh
+# The Intelligent Police Support System in a Smart City with the environment simulation
 
-# IDE 
-I use Visual studio Code with following plugins, and it geat tool for writing in LaTeX. In the repository I have included workspace for VSCode, and if you decide to use this editor, everything will be already set up to work
-
-Extensions I use:
-* james-yu.latex-workshop
-* valentjn.vscode-ltex
-* gruntfuggly.todo-tree
-
-
-For code snippets I use package called `minted`. It is great, but to make it work you will need python, and module called `pygments`
-to install it just type 
-
-```{bash}
-pip install Pygments
-```
-
-# Some tips for beginers
-If you want to add a word in another language use `\foreignlanguage{english}{eng. \textit{word}}`. This will ensure that language tool will understand you changed the language, and it will not mark it as unknown word. The second benefit is that when LaTeX will lay down text, and it will have to break line, it will do so accordingly to the correct language roules
-
-Every section should start on the odd number of pages. It is done automatically, so you do not need to do anything.
-Because of the setup, floating objects like listings, images or tables, will not leak to next section (before every section there is a barier, that prevent rendering floating objects in next chapter)
-
-To determine the odd page the page number is taken to account (it starts after table of contents), so check it before submiting yout thesis, and add empty page after table of contents if it is necessary
+The aim of the thesis was to model the operation of a multi-agent system in a smart city, along with defining and classifying the context that the agents use. The chosen domain was police interventions, with the possibility of them turning into shootings. In order to reliably represent a system, that can operate in reality, agents exist within a distributed system, communicating asynchronously. A solution designed in this way requires the selection of appropriate technologies and the definition of possible messages to enable the flow of knowledge between agents involved in communication. For this purpose, it was decided to use tools such as .NET - to implement the main logic, RabbitMQ - for communication between microservices, PostgreSQL with postGIS - to use OSM data. Additionally, a tool was designed to visualize the system's current state and to collect data that would enable further analysis. Testing the impact of contextual data was possible thanks to a simulation, that simulates the system's operation. Simulated units can move around complex metropolises, thanks to integration with OpenStreetMap. The entire system was containerized using Docker technology. The designed solution has many configuration options, which allows it to be adapted to the needs of a specific problem. In this case, it was decided to check its operation based on a map of the city of Krakow. Based on the system's operation, results were obtained and analyzed in terms of the impact of contextual data on the decision-making process. The conclusion reached is the possibility of a positive impact of taking into account contextual data on the system's performance results.
